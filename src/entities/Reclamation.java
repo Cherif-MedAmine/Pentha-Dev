@@ -7,7 +7,7 @@ package entities;
 
 /**
  *
- * @author AJ
+ * @author AJ   
  */
 public class Reclamation {
     
