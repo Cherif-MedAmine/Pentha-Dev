@@ -22,7 +22,7 @@ public class ReclamationServiceImpl implements ReclamationService {
         String req = "INSERT INTO `reclamation`( `idCategorieRec`, `idAnnonceRec`, `idUserRec`, `idUserSRec`, `objet`, `textRec`, `statusRec`) VALUES (" +R.getIdCategorieRec()+ "," +R.getIdAnnonceRec()+ "," +R.getIdUserRec()+ "," +R.getIdUserSRec()+ ",'" +R.getObjet()+ "','" +R.getTextRec()+ "','" +R.getStatusRec()+ "')" ;
         Statement st  ;
         try {
-        st = conx.createStatement() ;
+        st = conx.createStatement() ;  
         st.executeUpdate(req) ;}
         catch (SQLException ex) {
             System.err.println(ex.getMessage());
