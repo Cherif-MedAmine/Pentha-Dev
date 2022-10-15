@@ -18,7 +18,6 @@ public interface ReclamationService {
     public void updateReclamation(Reclamation R);
     public void deleteReclamation(int idReclamation);
     public List<Reclamation> getAll();
-    //select * from Recalmation where id=id;
     //public Reclamation getOneById(int idRcalmation);
     //public List<Reclamation> getAllBySender(int idUserSRec);
     

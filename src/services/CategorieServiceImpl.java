@@ -37,8 +37,7 @@ public class CategorieServiceImpl implements CategorieService{
         Statement st  ;
         try {
         st = conx.createStatement() ;
-        st.executeUpdate(req) ;
-        System.out.println("La Categorie est modifier");}
+        st.executeUpdate(req) ;}
         catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
@@ -77,7 +76,6 @@ public class CategorieServiceImpl implements CategorieService{
         }
     return list;
     }
-    
     
     
 }

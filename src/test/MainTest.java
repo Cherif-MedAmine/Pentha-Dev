@@ -56,8 +56,6 @@ public class MainTest {
        Reclamation R1 = new Reclamation (1, 1, 1, 1, 4, "o", "text1", "ok") ;
        Reclamation R2 = new Reclamation (2, 1, 1, 4, 1, "m", "text4", "not ok") ;
        Reclamation R3 = new Reclamation (5, 2, 2, 1, 4, "k", "text3", "ok") ;
-       //Reclamation R2 = new Reclamation (2,3 , "Faux annonce") ;
-       //Reclamation R3 = new Reclamation (4,3 , "Prix gonflé") ;
        ReclamationService rc = new ReclamationServiceImpl () ;
        
        
@@ -67,7 +65,7 @@ public class MainTest {
        //cc.getAll();
        
        
-       rc.createReclamation(R2); 
+       //rc.createReclamation(R2); 
        //rc.updateReclamation(R3);
        //rc.deleteReclamation(4);
        //rc.getAll();

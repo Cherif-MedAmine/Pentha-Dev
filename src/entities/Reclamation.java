@@ -7,18 +7,13 @@ package entities;
 
 /**
  *
- * @author AJ   
+ * @author AJ
  */
 public class Reclamation {
     
     private int idReclamation, idCategorieRec, idAnnonceRec, idUserRec,	idUserSRec;
     private String objet, textRec, statusRec;
-    /* 
-    private string creationDate;
-    private boolean expired = false ;
     
-    if creationDate < system.now() + 3 monthes expired = true;
-    */
 
     public Reclamation(int idReclamation, int idCategorieRec, int idAnnonceRec, int idUserRec, int idUserSRec, String objet, String textRec, String statusRec) {
         this.idReclamation = idReclamation;

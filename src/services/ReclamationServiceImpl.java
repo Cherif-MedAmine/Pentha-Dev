@@ -36,8 +36,7 @@ public class ReclamationServiceImpl implements ReclamationService {
         Statement st  ;
         try {
         st = conx.createStatement() ;
-        st.executeUpdate(req) ;
-        System.out.println("La reclamation est modifier");}
+        st.executeUpdate(req) ;}
         catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
@@ -83,7 +82,7 @@ public class ReclamationServiceImpl implements ReclamationService {
     @Override
     public List<Reclamation> getAllBySender(int idSender) {
         // get all sender's recalmation where the reclamation are not expired yet.
-        //select * from Rcalamation wwhere sender= idSender and expired = false;        
+        //select * from Rcalamation wwhere sender= idSender;        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     */
