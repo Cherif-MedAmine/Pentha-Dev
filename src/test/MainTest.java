@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package test;
 
 import entities.Categorie;
@@ -16,7 +11,7 @@ import services.MessageCRUD;
 import services.ReclamationService;
 import services.ReclamationServiceImpl;
 import utils.MyDB;
-
+import java.util.List;
 /**
  *
  * @author AJ
@@ -31,12 +26,12 @@ public class MainTest {
     
        MyDB c = MyDB.getInstance() ;
        
-       Message M1 = new Message (5,8, 1 ,"ria","helmi" );
+       //Message M1 = new Message (5,8, 1 ,"ria","helmi" );
         //Message M2 = new Message (2,3,4,"salah","jebalia");
-        MessageCRUD MC = new MessageCRUD();
+        //MessageCRUD MC = new MessageCRUD();
         
-        Discussion D1 = new Discussion (8, 5 , 1);
-        DiscussionCRUD DC = new DiscussionCRUD () ;
+        //Discussion D1 = new Discussion (8, 5 , 1);
+        //DiscussionCRUD DC = new DiscussionCRUD () ;
         
         //MC.ajouterMessage(M1); 
         //MC.modifierMessage(M1);
@@ -69,8 +64,8 @@ public class MainTest {
        //rc.updateReclamation(R3);
        //rc.deleteReclamation(4);
        //rc.getAll();
+       
+      
 
     }
 }
-    
-
