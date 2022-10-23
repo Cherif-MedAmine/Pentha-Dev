@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #E1F8DD;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.HomeReclamationController">
+   <children>
+      <Button fx:id="passRec" layoutX="414.0" layoutY="36.0" mnemonicParsing="false" onAction="#onPassRecAction" styleClass="radius" stylesheets="@Style.css" text="Passer une reclamation" />
+      <Button fx:id="gerRec" layoutX="414.0" layoutY="68.0" mnemonicParsing="false" onAction="#onGerRecAction" prefHeight="25.0" prefWidth="139.0" styleClass="radius" stylesheets="@Style.css" text="Gerer mes reclamation" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TestAdminController">
+   <children>
+      <Button fx:id="gererCat" layoutX="424.0" layoutY="46.0" mnemonicParsing="false" onAction="#ongererCatAction" prefHeight="25.0" prefWidth="139.0" styleClass="radius" stylesheets="@Style.css" text="Gerer categories" />
+      <Button fx:id="gererRec" layoutX="424.0" layoutY="78.0" mnemonicParsing="false" onAction="#onGererRecAction" prefHeight="25.0" prefWidth="139.0" styleClass="radius" stylesheets="@Style.css" text="Gerer reclamation" />
+   </children>
+</AnchorPane>

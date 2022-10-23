@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="1000.0" style="-fx-background-image: #E1F8DD;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ListReclamationAdminController">
+   <children>
+      <TableView fx:id="tvReclamaton" layoutX="1.0" layoutY="50.0" prefHeight="300.0" prefWidth="1000.0" styleClass="light-gray-background" stylesheets="@Style.css">
+        <columns>
+          <TableColumn fx:id="tcIdReclamation" maxWidth="80.0" minWidth="80.0" prefWidth="75.0" text="ID Réclamation" />
+          <TableColumn fx:id="tcIdCategorieRec" maxWidth="80.0" minWidth="80.0" prefWidth="75.0" text="ID Categorie" />
+            <TableColumn fx:id="tcIdAnnonceRec" maxWidth="80.0" minWidth="80.0" prefWidth="75.0" text="ID Annonce" />
+            <TableColumn fx:id="tcIdUserRecS" maxWidth="80.0" minWidth="80.0" prefWidth="75.0" text="ID Sender" />
+            <TableColumn fx:id="tcIdUserRecR" maxWidth="80.0" minWidth="80.0" prefWidth="75.0" text="ID Receiver" />
+            <TableColumn fx:id="tcChoiceRec" maxWidth="180.0" minWidth="180.0" prefWidth="75.0" text="Choix" />
+            <TableColumn fx:id="tcDescRec" maxWidth="200.0" minWidth="240.0" prefWidth="75.0" text="Description" />
+            <TableColumn fx:id="tcStatusRec" maxWidth="200.0" minWidth="80.0" prefWidth="75.0" text="Status" />
+            <TableColumn fx:id="tcDateRec" maxWidth="100.0" minWidth="100.0" prefWidth="75.0" text="Date de Création" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnSupprimerRec" layoutX="731.0" layoutY="403.0" maxHeight="100.0" maxWidth="100.0" mnemonicParsing="false" onAction="#onBtnSupprimerRecAction" style="-fx-background-color: #EE4B2B;" styleClass="radius" stylesheets="@Style.css" text="SUPPRIMER" />
+      <Button fx:id="btnRetourRec" layoutX="163.0" layoutY="404.0" maxHeight="100.0" maxWidth="100.0" mnemonicParsing="false" onAction="#onBtnRetourRecAction" prefHeight="25.0" prefWidth="80.0" styleClass="radius" stylesheets="@Style.css" text="&lt; RETOUR  " />
+      <Label layoutX="255.0" layoutY="368.0" text="La réclamation sélectionner :" />
+      <Label fx:id="labelRec" layoutX="417.0" layoutY="367.0" prefHeight="5.0" prefWidth="103.0" />
+      <Label layoutX="163.0" layoutY="14.0" text="La liste des tous les réclamations">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
