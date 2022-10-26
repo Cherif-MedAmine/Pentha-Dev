@@ -27,6 +27,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import services.CategorieService;
@@ -60,6 +61,10 @@ public class ListCategorieController implements Initializable {
     private Label labelCat;
     @FXML
     private Button btnRetourCat;
+    @FXML
+    private TextField tfChercher;
+    @FXML
+    private Button btnChercherCat;
 
     /**
      * Initializes the controller class.
@@ -68,6 +73,7 @@ public class ListCategorieController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         tcID.setCellValueFactory(new PropertyValueFactory<Categorie, String>("idCategorie")); 
         tcNomCat.setCellValueFactory(new PropertyValueFactory<Categorie, String>("nomCat"));
+        
         listC = categorieServiceImpl.getAll();
         dataC = FXCollections.observableArrayList(listC);
         tvCat.setItems(dataC);
@@ -107,6 +113,21 @@ public class ListCategorieController implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    private void onBtnChercherCatAction(ActionEvent event) {
+        try{
+            if (tfChercher.getText().length() != 0) {
+                listC = categorieServiceImpl.findCategorieByName(tfChercher.getText());
+            }else {
+                new Alert(Alert.AlertType.INFORMATION, "Entrer un nom !!").show();
+            }
+            dataC = FXCollections.observableArrayList(listC);
+            tvCat.setItems(dataC);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
 }

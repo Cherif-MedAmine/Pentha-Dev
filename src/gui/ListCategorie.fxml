@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #E1F8DD;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ListCategorieController">
@@ -18,5 +19,8 @@
       <Label fx:id="labelCat" layoutX="418.0" layoutY="200.0" />
       <Button fx:id="btnRetourCat" layoutX="200.0" layoutY="320.0" maxHeight="100.0" maxWidth="100.0" mnemonicParsing="false" onAction="#onBtnRetourCatAction" prefHeight="25.0" prefWidth="80.0" styleClass="radius" stylesheets="@Style.css" text="&lt; RETOUR  " />
       <Label layoutX="419.0" layoutY="175.0" text="La catégorie sélectionner :" />
+      <TextField fx:id="tfChercher" layoutX="14.0" layoutY="197.0" prefHeight="25.0" prefWidth="176.0" style="-fx-border-color: #eda678; -fx-border-width: 2;" />
+      <Label layoutX="25.0" layoutY="175.0" text="Chercher par nom catégorie :" />
+      <Button fx:id="btnChercherCat" layoutX="62.0" layoutY="241.0" maxHeight="100.0" maxWidth="100.0" mnemonicParsing="false" onAction="#onBtnChercherCatAction" prefHeight="25.0" prefWidth="80.0" styleClass="radius" stylesheets="@Style.css" text="CHERCHER" />
    </children>
 </AnchorPane>

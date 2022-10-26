@@ -5,11 +5,18 @@
  */
 package gui;
 
+import entities.Annonce;
 import entities.Categorie;
 import entities.Reclamation;
+import entities.User;
 import java.io.IOException;
 import java.net.URL;
+import static java.sql.Types.NULL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,7 +34,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import services.CategorieService;
 import services.CategorieServiceImpl;
+import services.InterfaceUser;
+import services.ReclamationService;
 import services.ReclamationServiceImpl;
+import services.UserCRUD;
 
 /**
  * FXML Controller class
@@ -40,57 +50,111 @@ public class AddReclamationController implements Initializable {
     private Scene scene;
     private Parent root;
     private Categorie selectedCategorie;
+    int selectedItem = 0;
     
     private CategorieService categorieService = new CategorieServiceImpl();
+    
+    private ReclamationService reclamationService = new ReclamationServiceImpl();
+    
+    private InterfaceUser interfaceUser = new UserCRUD();
 
     @FXML
     private TextArea taDescRec;
+   
     @FXML
     private Button btnEnvoyerRec;
+   
     @FXML
     private Label labelChoiceRec;
     private TextField tfChoiceRec;
+  
     @FXML
     private Label labelDescRec;
+   
     @FXML
     private Button btnRetourRec;
+   
     @FXML
-    private ComboBox<?> cbChoiceRec;
+    private ComboBox<String> cbChoiceRec;
     @FXML
     private ComboBox<String> cbTypeRec;
-
+    @FXML
+    private Label labelRec;
+    @FXML
+    private ComboBox<String> cbRec;
+    
+    HashMap<Integer, String> map = new HashMap<>();  
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         initCategorieComoboBox();
-    }    
-    
+        labelRec.setVisible(false);    
+        cbChoiceRec.setVisible(false);
+        labelChoiceRec.setVisible(false);
+        cbRec.setVisible(false);
+        btnEnvoyerRec.setDisable(true);
+        
+        map.put(1, "C1");
+        map.put(2, "C2");
+        map.put(3, "C3");
+        
+        boolean isValid = cbTypeRec.getItems().isEmpty() || cbChoiceRec.getItems().isEmpty()  ;
+        System.out.println("********************"+ cbTypeRec.getItems().isEmpty());
+        if(isValid) 
+            btnEnvoyerRec.setDisable(false);
+        
+    }
     
     private void initCategorieComoboBox(){
         //get all categories from DB
         List<Categorie> categories = categorieService.getAll();
         // fill the combobox by categories fetched from DB
         categories.stream().forEach(categorie -> cbTypeRec.getItems().add(categorie.getNomCat()));
-        // Action fired when select an item from the combobox
-        cbTypeRec.setOnAction((event) -> {
-        int selectedItem = cbTypeRec.getSelectionModel().getSelectedIndex()+1;
-        //get 1 categorie from DB
-        selectedCategorie = categorieService.getOneById(selectedItem);
-        });
     }
     
     @FXML
     private void onBtnEnvoyerRecAction(ActionEvent event) throws IOException {
         //Reclamation r = new Reclamation(1, Integer.valueOf(tfTypeRec.getText()), 1, 1, 4, tfChoiceRec.getText(), taDescRec.getText(), "unseen", "11/10/2022");
-        Reclamation r = new Reclamation(1, selectedCategorie.getIdCategorie(), 1, 1, 4, "2", taDescRec.getText(), "unseen", "11/10/2022");
+        Integer idAnnonceRec = NULL;
+        Integer idUserRecR = NULL;
+        String choice = map.get(cbChoiceRec.getSelectionModel().getSelectedIndex()+1);
+        System.out.println("cbChoiceRec.getSelectionModel()"+cbChoiceRec.getSelectionModel());
+        System.out.println("choice"+choice);
+        if (selectedItem == 1){
+            idAnnonceRec = reclamationService.getOneAnonceById(cbRec.getSelectionModel().getSelectedIndex()+1).getIdAnnonce();
+            System.out.println("idAnnonceRec"+idAnnonceRec);
+        }
+        if (selectedItem == 2){
+            idUserRecR = interfaceUser.getOneById(cbRec.getSelectionModel().getSelectedIndex()+1).getIdUser();
+            System.out.println("idUserRecR"+idUserRecR);   
+        }
+            System.out.println("selectedCategorie "+selectedCategorie);
+            System.out.println("taDescRec "+taDescRec.getText());
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDateTime now = LocalDateTime.now(); 
+            Reclamation r = new Reclamation()
+                .idReclamation(1)
+                .idCategorieRec(selectedCategorie.getIdCategorie())
+                .idAnnonceRec(idAnnonceRec)
+                .idUserRecS(1)
+                .idUserRecR(idUserRecR)
+                .choiceRec(choice)
+                .descRec(taDescRec.getText())
+                .statusRec("unseen")
+                .dateRec(now.toString())
+                ;
+        System.out.println("reclamation"+r);
+            
+        btnEnvoyerRec.setDisable(false);
         ReclamationServiceImpl reclamationServiceImpl = new ReclamationServiceImpl();
         reclamationServiceImpl.createReclamation(r);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("./ListReclamation.fxml"));
         Parent root;
         root=loader.load();
-        btnEnvoyerRec.getScene().setRoot(root);
+        btnEnvoyerRec.getScene().setRoot(root);  
         
         new Alert(Alert.AlertType.INFORMATION, "Réclamation envoyer avec succès").show();
     }
@@ -103,5 +167,58 @@ public class AddReclamationController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    
+
+    @FXML
+    private void onTypeRecAction(ActionEvent event) {
+        selectedItem = cbTypeRec.getSelectionModel().getSelectedIndex()+1;
+        //get 1 categorie from DB
+        selectedCategorie = categorieService.getOneById(selectedItem);
+        if (selectedItem == 1){
+            cbChoiceRec.getItems().clear();
+            map.entrySet().forEach(c -> cbChoiceRec.getItems().add(c.getValue()));
+
+            List<Annonce> listeAnnonce = reclamationService.getAllAnnonces();
+            //reset combo
+            cbRec.getItems().clear();
+            listeAnnonce.stream().forEach(annonce -> cbRec.getItems().add(annonce.getDescription()));
+            System.out.println("listeAnnonce: "+listeAnnonce);
+            cbRec.setVisible(true);
+            labelRec.setVisible(true);
+            labelRec.setText("Choisir l'annonce à réclamer *");
+            labelChoiceRec.setVisible(true);
+            cbChoiceRec.setVisible(true);
+        }
+        if (selectedItem == 2){
+            cbChoiceRec.getItems().clear();
+            map.entrySet().forEach(c -> cbChoiceRec.getItems().add(c.getValue()));
+
+            List<User> listeUser = interfaceUser.Afficher();
+            //reset combo
+            cbRec.getItems().clear();
+            //cbChoiceRec.getItems().clear();
+            listeUser.stream().forEach(user -> cbRec.getItems().add(user.getFullName()));
+            //System.out.println("listeAnnonce: "+listeAnnonce);
+            cbRec.setVisible(true);
+            labelRec.setVisible(true);
+            labelRec.setText("Choisir l'utilisateur à réclamer *");
+            labelChoiceRec.setVisible(true);
+            cbChoiceRec.setVisible(true);
+            /*map.entrySet().forEach(c -> cbChoiceRec.getItems().add(c.getValue()));
+            List<User> listeUser = interfaceUser.Afficher();
+            cbRec.getItems().removeAll();
+            cbRec.valueProperty().set(null);
+            listeUser.stream().forEach(user -> cbRec.getItems().add(user.getFullName()));
+            System.out.println("listeUser:"+listeUser);
+            cbRec.setVisible(true);
+            labelRec.setVisible(true);
+            labelRec.setText("Choisir l'utilisateur à réclamer *");*/
+        }
+        if(selectedItem == 3){
+            cbRec.setVisible(false);
+            labelRec.setVisible(false);
+            labelChoiceRec.setVisible(false);
+            cbChoiceRec.setVisible(false);         
+        }
+        
+    } 
 }

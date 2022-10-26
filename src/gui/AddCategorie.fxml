@@ -9,6 +9,7 @@
    <children>
       <Label layoutX="136.0" layoutY="183.0" text="Nom Categorie" />
       <TextField fx:id="tfNomCat" layoutX="237.0" layoutY="179.0" prefHeight="25.0" prefWidth="189.0" styleClass="incoming-bubble" stylesheets="@Style.css" />
-      <Button fx:id="btnAddCat" layoutX="371.0" layoutY="220.0" mnemonicParsing="false" onAction="#onBtnAddCatAction" styleClass="outgoing-bubble" stylesheets="@Style.css" text="Ajouter" />
+      <Button fx:id="btnAddCat" layoutX="346.0" layoutY="220.0" mnemonicParsing="false" onAction="#onBtnAddCatAction" prefHeight="25.0" prefWidth="80.0" styleClass="outgoing-bubble" stylesheets="@Style.css" text="Ajouter" />
+      <Button fx:id="btnRetourCat" layoutX="136.0" layoutY="220.0" maxHeight="100.0" maxWidth="100.0" mnemonicParsing="false" onAction="#onBtnRetourCatAction" prefHeight="25.0" prefWidth="80.0" styleClass="radius" stylesheets="@Style.css" text="&lt; RETOUR  " />
    </children>
 </AnchorPane>

@@ -33,7 +33,7 @@ public class MainTest {
        
         Reclamation R1 = new Reclamation (1, 1, 1, 1, 4, "s", "text4", "ok", "08/10/2022") ;
         Reclamation R2 = new Reclamation (7, 1, 1, 4, 1, "m", "text2", "ok", "09/10/2022") ;
-        Reclamation R3 = new Reclamation (5, 2, 2, 1, 4, "k", "text3", "ok", "10/10/2022") ;
+        Reclamation R3 = new Reclamation (5, 2, 2, 1, 4, "h", "text4", "ok", "24/10/2022") ;
         ReclamationService rc = new ReclamationServiceImpl () ;
        
        
@@ -43,12 +43,10 @@ public class MainTest {
         //cc.getAll();
        
        
-        //rc.createReclamation(R1);
+        //rc.createReclamation(R3);
         //rc.updateReclamation(R2);
         //rc.deleteReclamation(6);
         //rc.getAll();
 
-    }
 }
-    
-
+}

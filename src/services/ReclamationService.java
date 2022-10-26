@@ -5,6 +5,7 @@
  */
 package services;
 
+import entities.Annonce;
 import entities.Reclamation;
 import java.util.List;
 
@@ -19,7 +20,11 @@ public interface ReclamationService {
     public void deleteReclamation(int idReclamation);
     public List<Reclamation> getAll();
     //select * from Recalmation where id=id;
-    //public Reclamation getOneById(int idRcalmation);
-    //public List<Reclamation> getAllBySender(int idUserSRec);
+    public Reclamation getOneById(int idRcalmation);
+    public Annonce getOneAnonceById(int idRcalmation);
+    public List<Reclamation> getAllBySender(int idUserSRec);
+    public List<Annonce> getAllAnnonces();
+    
+    public List<Reclamation> findReclamationByChoice(String choiceRec);
     
 }

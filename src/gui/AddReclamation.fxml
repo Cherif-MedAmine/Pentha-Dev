@@ -9,30 +9,31 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #E1F8DD;" styleClass="transparent-backround" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AddReclamationController">
    <children>
-      <Label layoutX="60.0" layoutY="20.0" stylesheets="@Style.css" text="Quel problème avez-vous rencontré ?">
+      <Label layoutX="60.0" layoutY="20.0" stylesheets="@Style.css" text="Choisir le type de reclamation *">
          <font>
             <Font size="14.0" />
          </font></Label>
       <Button fx:id="btnEnvoyerRec" layoutX="500.0" layoutY="361.0" mnemonicParsing="false" onAction="#onBtnEnvoyerRecAction" styleClass="outgoing-bubble" stylesheets="@Style.css" text="ENVOYER &gt;" />
       <TextArea fx:id="taDescRec" layoutX="60.0" layoutY="261.0" prefHeight="100.0" prefWidth="413.0" styleClass="light-gray-background" stylesheets="@Style.css" />
-      <Label fx:id="labelChoiceRec" layoutX="60.0" layoutY="69.0" stylesheets="@Style.css" text="Pouvez-vous préciser ?">
+      <Label fx:id="labelChoiceRec" layoutX="60.0" layoutY="126.0" stylesheets="@Style.css" text="Préciser votre choix *">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="labelDescRec" layoutX="60.0" layoutY="241.0" stylesheets="@Style.css" text="Ajouter une description">
+      <Label fx:id="labelDescRec" layoutX="62.0" layoutY="241.0" stylesheets="@Style.css" text="Ajouter une description">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
       <Button fx:id="btnRetourRec" layoutX="507.0" layoutY="18.0" mnemonicParsing="false" onAction="#onBtnRetourRecAction" prefHeight="25.0" prefWidth="79.0" styleClass="radius" stylesheets="@Style.css" text="&lt; RETOUR  " />
-      <ComboBox fx:id="cbTypeRec" layoutX="60.0" layoutY="40.0" prefWidth="150.0" styleClass="light-gray-background" stylesheets="@Style.css" />
-      <ComboBox fx:id="cbChoiceRec" layoutX="60.0" layoutY="93.0" prefWidth="150.0" styleClass="light-gray-background" stylesheets="@Style.css" />
-      <Label layoutX="60.0" layoutY="122.0" stylesheets="@Style.css" text="Selectionner l'annonce à réclamer">
+      <ComboBox fx:id="cbTypeRec" layoutX="60.0" layoutY="40.0" onAction="#onTypeRecAction" prefWidth="150.0" styleClass="light-gray-background" stylesheets="@Style.css" />
+      <ComboBox fx:id="cbChoiceRec" layoutX="58.0" layoutY="146.0" prefWidth="150.0" styleClass="light-gray-background" stylesheets="@Style.css" />
+      <Label fx:id="labelRec" layoutX="60.0" layoutY="73.0" prefHeight="20.0" prefWidth="216.0" stylesheets="@Style.css" text=" ">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <ComboBox layoutX="60.0" layoutY="146.0" prefWidth="150.0" styleClass="light-gray-background" stylesheets="@Style.css" />
+      <ComboBox fx:id="cbRec" layoutX="60.0" layoutY="93.0" prefWidth="150.0" styleClass="light-gray-background" stylesheets="@Style.css" />
+      <Label layoutX="60.0" layoutY="365.0" text="[*] Champ obligatoir" />
    </children>
 </AnchorPane>

@@ -14,6 +14,7 @@ public class Categorie {
     private int idCategorie;
     private String nomCat;
     
+
     public Categorie(int idCategorie, String nomCat) {
         this.idCategorie = idCategorie;
         this.nomCat = nomCat;

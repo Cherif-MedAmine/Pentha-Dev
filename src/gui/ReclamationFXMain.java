@@ -31,6 +31,7 @@ public class ReclamationFXMain extends Application {
             Parent root = FXMLLoader.load(getClass().getResource("HomeReclamation.fxml"));
             //Parent root = FXMLLoader.load(getClass().getResource("TestAdmin.fxml"));
             
+            
             Scene scene = new Scene(root);
             
             //scene.getStylesheets().add(getClass().getResource("Style.css").toExternalForm());

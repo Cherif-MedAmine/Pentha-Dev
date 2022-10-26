@@ -13,10 +13,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import services.CategorieServiceImpl;
 
 /**
@@ -25,11 +28,17 @@ import services.CategorieServiceImpl;
  * @author AJ
  */
 public class AddCategorieController implements Initializable {
+    
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     @FXML
     private TextField tfNomCat;
     @FXML
     private Button btnAddCat;
+    @FXML
+    private Button btnRetourCat;
 
     /**
      * Initializes the controller class.
@@ -50,6 +59,15 @@ public class AddCategorieController implements Initializable {
         btnAddCat.getScene().setRoot(root);
         
         new Alert(Alert.AlertType.INFORMATION, "Categorie ajouter avec succès").show();
+    }
+
+    @FXML
+    private void onBtnRetourCatAction(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("TestAdmin.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
     
 }

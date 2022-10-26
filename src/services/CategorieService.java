@@ -20,4 +20,6 @@ public interface CategorieService {
     public List<Categorie> getAll();
     public Categorie getOneById(int id);
     
+    public List<Categorie> findCategorieByName(String nomCat);
+    
 }

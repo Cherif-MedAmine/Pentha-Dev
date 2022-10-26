@@ -11,7 +11,11 @@ package entities;
  */
 public class Reclamation {
     
-    private int idReclamation, idCategorieRec, idAnnonceRec, idUserRecS, idUserRecR;
+    //FK
+    private Integer idReclamation, idCategorieRec, idAnnonceRec, idUserRecS, idUserRecR;
+    // For view
+    private String  nomCategorieRec, nomAnnonceRec, nomUserRecS, nomUserRecR;
+    
     private String choiceRec, descRec, statusRec, dateRec;
     /* 
     private string creationDate;
@@ -19,6 +23,9 @@ public class Reclamation {
     
     if creationDate < system.now() + 3 monthes expired = true;
     */
+
+    public Reclamation() {
+    }
 
     public Reclamation(int idReclamation, int idCategorieRec, int idAnnonceRec, int idUserRecS, int idUserRecR, String choiceRec, String descRec, String statusRec, String dateRec) {
         this.idReclamation = idReclamation;
@@ -32,25 +39,47 @@ public class Reclamation {
         this.dateRec = dateRec;
     }
 
-    public int getIdReclamation() {
+    public Integer getIdReclamation() {
         return idReclamation;
     }
 
-    public int getIdCategorieRec() {
+    public void setIdReclamation(Integer idReclamation) {
+        this.idReclamation = idReclamation;
+    }
+
+    public Integer getIdCategorieRec() {
         return idCategorieRec;
     }
 
-    public int getIdAnnonceRec() {
+    public void setIdCategorieRec(Integer idCategorieRec) {
+        this.idCategorieRec = idCategorieRec;
+    }
+
+    public Integer getIdAnnonceRec() {
         return idAnnonceRec;
     }
 
-    public int getIdUserRecS() {
+    public void setIdAnnonceRec(Integer idAnnonceRec) {
+        this.idAnnonceRec = idAnnonceRec;
+    }
+
+    public Integer getIdUserRecS() {
         return idUserRecS;
     }
 
-    public int getIdUserRecR() {
+    public void setIdUserRecS(Integer idUserRecS) {
+        this.idUserRecS = idUserRecS;
+    }
+
+    public Integer getIdUserRecR() {
         return idUserRecR;
     }
+
+    public void setIdUserRecR(Integer idUserRecR) {
+        this.idUserRecR = idUserRecR;
+    }
+
+    
 
     public String getChoiceRec() {
         return choiceRec;
@@ -67,7 +96,6 @@ public class Reclamation {
     public String getDateRec() {
         return dateRec;
     }
-
     public void setIdReclamation(int idReclamation) {
         this.idReclamation = idReclamation;
     }
@@ -99,25 +127,94 @@ public class Reclamation {
     public void setStatusRec(String statusRec) {
         this.statusRec = statusRec;
     }
+    public Reclamation idReclamation(int idReclamation) {
+        this.idReclamation = idReclamation;
+         return this;
+    }
+
+    public Reclamation idCategorieRec(int idCategorieRec) {
+        this.idCategorieRec = idCategorieRec;
+        return this;
+    }
+
+    public Reclamation idAnnonceRec(int idAnnonceRec) {
+        this.idAnnonceRec = idAnnonceRec;
+        return this;        
+    }
+
+    public Reclamation idUserRecS(int idUserRecS) {
+        this.idUserRecS = idUserRecS;
+        return this;
+    }
+
+    public Reclamation idUserRecR (int idUserRecR) {
+        this.idUserRecR = idUserRecR;
+        return this;
+
+    }
+    
+
+    public Reclamation choiceRec(String choiceRec) {
+        this.choiceRec = choiceRec;
+        return this;
+    }
+
+    public Reclamation descRec(String descRec) {
+        this.descRec = descRec;
+        return this;
+    }
+
+    public Reclamation statusRec(String statusRec) {
+        this.statusRec = statusRec;
+        return this;
+    }
 
     public void setDateRec(String dateRec) {
         this.dateRec = dateRec;
     }
 
+    public Reclamation dateRec(String dateRec) {
+        this.dateRec = dateRec;
+        return this;
+    }
+
+    public String getNomCategorieRec() {
+        return nomCategorieRec;
+    }
+
+    public void setNomCategorieRec(String nomCategorieRec) {
+        this.nomCategorieRec = nomCategorieRec;
+    }
+
+    public String getNomAnnonceRec() {
+        return nomAnnonceRec;
+    }
+
+    public void setNomAnnonceRec(String nomAnnonceRec) {
+        this.nomAnnonceRec = nomAnnonceRec;
+    }
+
+    public String getNomUserRecS() {
+        return nomUserRecS;
+    }
+
+    public void setNomUserRecS(String nomUserRecS) {
+        this.nomUserRecS = nomUserRecS;
+    }
+
+    public String getNomUserRecR() {
+        return nomUserRecR;
+    }
+
+    public void setNomUserRecR(String nomUserRecR) {
+        this.nomUserRecR = nomUserRecR;
+    }
+
     @Override
     public String toString() {
-        return "Reclamation{" +
-                "idReclamation=" + idReclamation +
-                ", idCategorieRec=" + idCategorieRec +
-                ", idAnnonceRec=" + idAnnonceRec +
-                ", idUserRecS=" + idUserRecS +
-                ", idUserRecR=" + idUserRecR +
-                ", choiceRec='" + choiceRec + '\'' +
-                ", descRec='" + descRec + '\'' +
-                ", statusRec='" + statusRec + '\'' +
-                ", dateRec='" + dateRec + '\'' +
-                '}';
+        return "Reclamation{" + "idReclamation=" + idReclamation + ", idCategorieRec=" + idCategorieRec + ", idAnnonceRec=" + idAnnonceRec + ", idUserRecS=" + idUserRecS + ", idUserRecR=" + idUserRecR + ", nomCategorieRec=" + nomCategorieRec + ", nomAnnonceRec=" + nomAnnonceRec + ", nomUserRecS=" + nomUserRecS + ", nomUserRecR=" + nomUserRecR + ", choiceRec=" + choiceRec + ", descRec=" + descRec + ", statusRec=" + statusRec + ", dateRec=" + dateRec + '}';
     }
 
     
+     
 }

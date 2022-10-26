@@ -5,6 +5,7 @@
  */
 package services;
 
+import entities.Annonce;
 import java.util.List;
 import entities.Reclamation;
 import utils.MyDB;
@@ -65,8 +66,8 @@ public class ReclamationServiceImpl implements ReclamationService {
             st =conx.createStatement();
             ResultSet rs = st.executeQuery(req);
             while(rs.next()){
-                Reclamation r = new Reclamation (rs.getInt(1), rs.getInt("idCategorieRec"), rs.getInt("idAnnonceRec"), rs.getInt("idUserRecS"), rs.getInt("idUserRecR"),rs.getString("choiceRec"),rs.getString("descRec"),rs.getString("statusRec"),rs.getString("dateRec"));
-                list.add(r);
+               Reclamation r = new Reclamation (rs.getInt(1), rs.getInt("idCategorieRec"), rs.getInt("idAnnonceRec"), rs.getInt("idUserRecS"), rs.getInt("idUserRecR"),rs.getString("choiceRec"),rs.getString("descRec"),rs.getString("statusRec"),rs.getString("dateRec"));
+               list.add(r);
             }
         }
         catch (SQLException ex){
@@ -74,18 +75,119 @@ public class ReclamationServiceImpl implements ReclamationService {
         }
         return list;
     }   
-    /*
+    
     @Override
-    public Reclamation getOneById(int idRcalmation) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Reclamation getOneById(int idReclamation) {
+        Reclamation reclamation = new Reclamation();
+        String req="SELECT * FROM annonce where idAnnonce = " + idReclamation;
+        System.out.println("req: "+req);
+        System.out.println("id:" +idReclamation);
+                
+        try {
+            Statement statement=conx.createStatement();
+            ResultSet resultSet =statement.executeQuery(req);
+            if(resultSet.next()){
+                 reclamation.setIdReclamation(resultSet.getInt(1));
+                             }
+        } catch (SQLException ex) {
+            System.out.println("ex"+ex);
+        }
+       
+        System.out.println("Reclamation"+ reclamation);
+        return reclamation; 
     }
 
     @Override
     public List<Reclamation> getAllBySender(int idSender) {
-        // get all sender's recalmation where the reclamation are not expired yet.
-        //select * from Rcalamation wwhere sender= idSender and expired = false;        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List <Reclamation> list = new ArrayList<>();
+        try {
+            String req = "SELECT * FROM  Reclamation where idUserRecS = " +idSender;        
+            Statement st;
+            st =conx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while(rs.next()){
+               Reclamation r = new Reclamation (rs.getInt(1), rs.getInt("idCategorieRec"), rs.getInt("idAnnonceRec"), rs.getInt("idUserRecS"), rs.getInt("idUserRecR"),rs.getString("choiceRec"),rs.getString("descRec"),rs.getString("statusRec"),rs.getString("dateRec"));
+               list.add(r);
+            }
+        }
+        catch (SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+        return list;
     }
-    */
+
+    @Override
+    public List<Annonce> getAllAnnonces() {
+     List <Annonce> list = new ArrayList<>();
+        try {
+         String req = "SELECT * FROM  annonce";        
+         Statement st;
+         st =conx.createStatement();
+         ResultSet rs = st.executeQuery(req);
+         while(rs.next()){
+         Annonce A = new Annonce (rs.getInt(1), rs.getInt("idUserA"),rs.getString("description"),rs.getString("adresseAnnonce"),rs.getFloat("prixAnnonce"),rs.getString("regionAnnonce"),rs.getString("municipalite"),rs.getInt("codePostal"),rs.getString("typeOpertaion"),rs.getString("categorie"),rs.getString("longitude"),rs.getString("latitude"),rs.getString("statut"),rs.getString("superficie"),rs.getInt("archiveAnnonce"));
+         list.add(A);
+              }
+        }
+        catch (SQLException ex){
+         System.err.println(ex.getMessage());
+        }
+     return list; 
+    }
+
+    @Override
+    public Annonce getOneAnonceById(int id) {
+        Annonce categorie = new Annonce();
+        String req="SELECT * FROM annonce where idAnnonce = " + id;
+        System.out.println("req: "+req);
+        System.out.println("id:" +id);
+                
+        try {
+            Statement statement=conx.createStatement();
+            ResultSet resultSet =statement.executeQuery(req);
+            if(resultSet.next()){
+                 categorie.setIdAnnonce(resultSet.getInt(1));
+                 categorie.setDescription(resultSet.getString(3));
+            }
+        } catch (SQLException ex) {
+            System.out.println("ex"+ex);
+        }
+       
+        System.out.println("AnnonceReclamation"+ categorie);
+        return categorie; 
+    }
+
+    @Override
+    public List<Reclamation> findReclamationByChoice(String choiceRec) {
+        List<Reclamation> findReclamation = new ArrayList<>();
+        String req = "select * from reclamation where choiceRec=?";
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = conx.prepareStatement(req);
+            preparedStatement.setString(1, choiceRec);
+            ResultSet result = preparedStatement.executeQuery();
+            while (result.next()) {
+                Reclamation reclamation;
+                reclamation = new Reclamation();
+                reclamation.setIdReclamation(result.getInt("idReclamation"));
+                reclamation.setIdCategorieRec(result.getInt("idCategorieRec"));
+                reclamation.setIdAnnonceRec(result.getInt("idAnnonceRec"));
+                reclamation.setIdUserRecS(result.getInt("idUserRecS"));
+                reclamation.setIdUserRecR(result.getInt("idUserRecR"));
+                reclamation.setChoiceRec(result.getString("choiceRec"));
+                reclamation.setDescRec(result.getString("descRec"));
+                reclamation.setStatusRec(result.getString("statusRec"));
+                reclamation.setDateRec(result.getString("dateRec"));
+                findReclamation.add(reclamation);
+            }
+            
+        } catch (SQLException ex) {
+        }
+        return findReclamation;
+    }
+
+    
+    
     
 }
+        //select * from Rcalamation wwhere sender= idSender and expired = false;        

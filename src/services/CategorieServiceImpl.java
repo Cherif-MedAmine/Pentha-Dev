@@ -115,5 +115,27 @@ public class CategorieServiceImpl implements CategorieService{
         System.out.println("Category"+ categorie);
         return categorie;  
     }
+
+    @Override
+    public List<Categorie> findCategorieByName(String nomCat) {
+        List<Categorie> findCategorie = new ArrayList<>();
+        String req = "select * from categorie where nomCat=?";
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = conx.prepareStatement(req);
+            preparedStatement.setString(1, nomCat);
+            ResultSet result = preparedStatement.executeQuery();
+            while (result.next()) {
+                Categorie categorie;
+                categorie = new Categorie();
+                categorie.setIdCategorie(result.getInt("idCategorie"));
+                categorie.setNomCat(result.getString("nomCat"));
+                findCategorie.add(categorie);
+            }
+            
+        } catch (SQLException ex) {
+        }
+        return findCategorie;
+    }
     
 }
