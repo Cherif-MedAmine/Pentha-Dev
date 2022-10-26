@@ -16,7 +16,12 @@ import utils.MyDB;
  * @author Oumayma Gaiech
  */
 public class UserCRUD implements InterfaceUser{
-    Connection conx = MyDB.getInstance().getConnection();
+    Connection conx = MyDB.getInstance().getConnection();;
+
+    public UserCRUD() {
+        
+    }
+    
 
     @Override
     public void ajouterUser(User U) {
@@ -67,6 +72,29 @@ public class UserCRUD implements InterfaceUser{
     Statement st;
     st =conx.createStatement();
     ResultSet rs = st.executeQuery(req);
+    System.out.println("L'utilisateur est affiché");
+    while(rs.next()){
+    User u = new User (rs.getInt(1), rs.getString("fullname"),rs.getInt("genreUser"), rs.getString("email"),rs.getString("mdp"),rs.getString("region"),rs.getString("municipalite"),rs.getString("telephone"),rs.getString("role"),rs.getString("adresseAgence"),rs.getString("jourTravail"), rs.getString("heureTravail"));
+    list.add(u);
+              }
+        }
+        catch (SQLException ex){
+    System.err.println(ex.getMessage());
+}
+    return list;
+    } 
+    
+   @Override
+    public List<User> chercherParNom(String nom ) {
+
+    List <User> list = new ArrayList<>();
+        try {
+    String req = "SELECT * FROM  `user` WHERE `fullName`='" + nom+"'" ;        
+    Statement st;
+    st =conx.createStatement();
+   
+    ResultSet rs = st.executeQuery(req);
+    
     System.out.println("L'utilisateur est affiché");
     while(rs.next()){
     User u = new User (rs.getInt(1), rs.getString("fullname"),rs.getInt("genreUser"), rs.getString("email"),rs.getString("mdp"),rs.getString("region"),rs.getString("municipalite"),rs.getString("telephone"),rs.getString("role"),rs.getString("adresseAgence"),rs.getString("jourTravail"), rs.getString("heureTravail"));

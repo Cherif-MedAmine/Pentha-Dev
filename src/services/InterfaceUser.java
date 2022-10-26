@@ -12,5 +12,6 @@ public interface InterfaceUser {
     public void supprimerUser(int id) ;
     public void modifierUser(User U) ;
     public List<User> Afficher() ;
+    public List<User> chercherParNom(String nom );
     
 }

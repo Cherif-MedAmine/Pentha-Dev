@@ -12,10 +12,12 @@ import java.util.List;
  *
  * @author Riadh Akkari
  */
-interface InterfaceDiscussion {
-    public void ajouterDiscussion (Discussion D);
+public interface InterfaceDiscussion {
+    public int ajouterDiscussion (Discussion D);
     public void modifierDiscussion (Discussion D);
     public void supprimerDiscussion (int idDiscussion) ;
     public List<Discussion> Afficher(); 
+    public List<Discussion> AfficherDiscussionByIdUserS(int idUserS);
+    public List<Discussion> AfficherDiscussionByIdUserR(int idUserR);
     
 }

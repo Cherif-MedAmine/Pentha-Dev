@@ -10,7 +10,7 @@ package entities;
  * @author Riadh Akkari
  */
 public class Discussion {
-    private int idDiscussion;
+    private int idDiscussion; 
     private int idUserS;
     private int idUserR;
 
@@ -19,8 +19,16 @@ public class Discussion {
         this.idUserS = idUserS;
         this.idUserR = idUserR;
     }
+    public Discussion( int idUserS, int idUserR) {
+    
+        this.idUserS = idUserS;
+        this.idUserR = idUserR;
+        
+    }
 
-    public int getIdDiscussion() {
+   
+
+    public int getIdDiscussion(){
         return idDiscussion;
     }
 
@@ -43,6 +51,8 @@ public class Discussion {
     public void setIdUserR(int idUserR) {
         this.idUserR = idUserR;
     }
+
+   
 
     @Override
     public String toString() {

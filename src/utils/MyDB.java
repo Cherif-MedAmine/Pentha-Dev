@@ -14,7 +14,7 @@ import java.sql.SQLException;
  * @author AJ
  */
 public class MyDB {
-    final String url = "jdbc:mysql://localhost:3307/immoplus";
+    final String url = "jdbc:mysql://localhost:3306/immoplus";
     final String login = "root";
     final String password = "";
     Connection connexion;

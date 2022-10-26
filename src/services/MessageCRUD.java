@@ -32,12 +32,16 @@ public class MessageCRUD implements InterfaceMessage {
         catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
+        
     
 }
 
+    public MessageCRUD() {
+        
+    }
+
 
     
-    @Override
     public void modifierMessage(Message M) {
         String req = "UPDATE `message` SET `idDiscussionM`="+M.getIdDiscussionM()+",`idUserS_M`="+M.getIdUserS_M()+", `message` = '"+M.getMessage()+"', `dateMessage` = '"+M.getDateMessage()+"' WHERE idMessage ="+ M.getIdMessage() ;
         Statement st  ;
@@ -52,7 +56,6 @@ public class MessageCRUD implements InterfaceMessage {
 
     }
 
-    @Override
     public void supprimerMessage(int idMessage) {
         try {
         String req=" DELETE FROM message WHERE idMessage="+ idMessage ;
@@ -65,7 +68,6 @@ public class MessageCRUD implements InterfaceMessage {
     }
 
    
-    @Override
     public List<Message> Afficher() {
         List <Message> list = new ArrayList<>();
         try {
@@ -82,6 +84,44 @@ public class MessageCRUD implements InterfaceMessage {
     System.err.println(ex.getMessage());
 }
     return list;
+    }
+    
+    
+    public List<Message> getMessageByIdDiscussion(int idDiscussion) {
+      List <Message> list = new ArrayList<>();
+        try {
+    String req = "SELECT * FROM  Message  where idDiscussion='" +idDiscussion +"'";        
+    Statement st;
+    st =connexion.createStatement();
+    ResultSet rs = st.executeQuery(req);
+    while(rs.next()){
+    Message M = new Message (rs.getInt(1),rs.getInt("idDiscussionM"),rs.getInt("idUserS_M"),rs.getString("message"),rs.getString("dateMessage"));
+    list.add(M);
+              }
+        }
+        catch (SQLException ex){
+    System.err.println(ex.getMessage());
+}
+    return list;  
+    }
+
+    @Override
+    public List<Message> AfficherMessageByIdDiscussion(int idDiscussionM, int idUserS_M) {
+        List <Message> list = new ArrayList<>();
+        try {
+            String req = "SELECT * FROM  message where idDiscussionM='" +idDiscussionM+ "' AND idUserS_M='" +idUserS_M+ "'";
+            Statement st;
+            st =connexion.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while(rs.next()){
+                Message M = new Message (rs.getInt("idMessage"), rs.getInt("idDiscussionM"), rs.getInt("idUserS_M"), rs.getString("message"), rs.getString("dateMessage"));
+                list.add(M);
+            }
+        }
+        catch (SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+        return list;
     }
 }
 

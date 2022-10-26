@@ -22,10 +22,13 @@ public class Message {
         this.idUserS_M = idUserS_M;
         this.message = message;
         this.dateMessage = dateMessage;
-    }
-
-    public Message(int aInt, int aInt0, int aInt1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }    
+    public Message( int idDiscussionM, int idUserS_M,String message, String dateMessage) {
+        
+        this.idDiscussionM = idDiscussionM;
+        this.idUserS_M = idUserS_M;
+        this.message = message;
+        this.dateMessage = dateMessage;
     }
 
     public int getIdUserS_M() {

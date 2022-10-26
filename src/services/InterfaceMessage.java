@@ -18,4 +18,6 @@ public interface InterfaceMessage {
     public void supprimerMessage (int idMessage) ;
     public List<Message> Afficher(); 
     
+    public List<Message> AfficherMessageByIdDiscussion(int idDiscussion, int idUserS_M);
+    
 }

@@ -6,6 +6,8 @@
 
 package services;
 import entities.Discussion;
+import entities.Message;
+import entities.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +15,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import utils.MyDB;
 /**
  *
@@ -21,17 +25,38 @@ import utils.MyDB;
     public class DiscussionCRUD implements InterfaceDiscussion {
         Connection connexion = MyDB.getInstance().getConnection();
 
+    public DiscussionCRUD() {
+    }
+
     
         @Override
-        public void ajouterDiscussion(Discussion D) {
+        public int ajouterDiscussion(Discussion D) {
+            
         String req = "INSERT INTO `discussion` (`idUserS`,`idUserR`) VALUES (" +D.getIdUserS()+ "," +D.getIdUserR()+")";
-        Statement st  ;
-        try {
-        st = connexion.createStatement() ;
-        st.executeUpdate(req) ;}
-        catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }   
+        PreparedStatement ps  ;
+        System.err.println(req);
+        
+        
+            try {
+                ps = connexion.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
+                
+                int affectedRows = ps.executeUpdate();
+
+            ResultSet generatedKeys = ps.getGeneratedKeys();            
+            if (generatedKeys.next()) {
+               return (int) generatedKeys.getLong(1); 
+               
+            }
+            else {
+                throw new SQLException("Creating user failed, no ID obtained.");
+            }
+            } catch (SQLException ex) {
+                Logger.getLogger(DiscussionCRUD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return 0;
+            
+           
+        
     
     }
 
@@ -56,7 +81,26 @@ import utils.MyDB;
             st =connexion.createStatement();
             ResultSet rs = st.executeQuery(req);
             while(rs.next()){
-                Discussion D = new Discussion (rs.getInt(1), rs.getInt("idUserS"), rs.getInt("idUserR"));
+                Discussion D = new Discussion (rs.getInt("idDiscussion"), rs.getInt("idUserS"), rs.getInt("idUserR"));
+                list.add(D);
+            }
+        }
+        catch (SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+        return list;
+    }
+    
+    @Override
+    public List<Discussion> AfficherDiscussionByIdUserS(int idUserS) {
+        List <Discussion> list = new ArrayList<>();
+        try {
+            String req = "SELECT * FROM  Discussion where idUserS='" +idUserS +"'";
+            Statement st;
+            st =connexion.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while(rs.next()){
+                Discussion D = new Discussion (rs.getInt("idDiscussion"), rs.getInt("idUserS"), rs.getInt("idUserR"));
                 list.add(D);
             }
         }
@@ -78,5 +122,40 @@ import utils.MyDB;
             System.err.println(ex.getMessage());
         }
     }
-
+    public List<Discussion> AfficherDiscussionByIdUser(int idUserS) {
+        List <Discussion> list = new ArrayList<>();
+        try {
+            String req = "SELECT * FROM  Discussion where idUserS='" +idUserS+"'";
+            Statement st;
+            st =connexion.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while(rs.next()){
+                Discussion D = new Discussion (rs.getInt("idDiscussion"), rs.getInt("idUserS"), rs.getInt("idUserR"));
+                list.add(D);
+            }
+        }
+        catch (SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+        return list;
    }
+
+    @Override
+    public List<Discussion> AfficherDiscussionByIdUserR(int id) {
+        List <Discussion> list = new ArrayList<>();
+        try {
+            String req = "SELECT * FROM `discussion` WHERE '" +id+ "' in (idUserS,idUserR)"; 
+            Statement st;
+            st =connexion.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while(rs.next()){
+                Discussion D = new Discussion (rs.getInt("idDiscussion"), rs.getInt("idUserS"), rs.getInt("idUserR"));
+                list.add(D);
+            }
+        }
+        catch (SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+        return list;
+    }
+    }

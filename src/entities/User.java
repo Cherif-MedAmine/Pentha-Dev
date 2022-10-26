@@ -42,6 +42,12 @@ public User(){
         this.heureTravail = heureTravail;
     }
 
+    public User(int idUser , String fullName) {
+        this.idUser = idUser;
+        this.fullName = fullName;
+    }
+   
+   
     public int getIdUser() {
         return idUser;
     }
