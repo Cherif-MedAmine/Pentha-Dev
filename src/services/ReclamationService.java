@@ -27,4 +27,9 @@ public interface ReclamationService {
     
     public List<Reclamation> findReclamationByChoice(String choiceRec);
     
+    public int countAnnonceCategorie();
+    public int countCompteCategorie();
+    public int countAutreCategorie();
+    
+    
 }

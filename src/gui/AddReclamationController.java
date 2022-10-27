@@ -11,7 +11,7 @@ import entities.Reclamation;
 import entities.User;
 import java.io.IOException;
 import java.net.URL;
-import static java.sql.Types.NULL;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -83,7 +83,7 @@ public class AddReclamationController implements Initializable {
     @FXML
     private ComboBox<String> cbRec;
     
-    HashMap<Integer, String> map = new HashMap<>();  
+    HashMap<Integer, String> map = new HashMap<>(); 
     
     /**
      * Initializes the controller class.
@@ -97,14 +97,12 @@ public class AddReclamationController implements Initializable {
         cbRec.setVisible(false);
         btnEnvoyerRec.setDisable(true);
         
-        map.put(1, "C1");
-        map.put(2, "C2");
-        map.put(3, "C3");
-        
+       
+       
         boolean isValid = cbTypeRec.getItems().isEmpty() || cbChoiceRec.getItems().isEmpty()  ;
         System.out.println("********************"+ cbTypeRec.getItems().isEmpty());
         if(isValid) 
-            btnEnvoyerRec.setDisable(false);
+        btnEnvoyerRec.setDisable(false);
         
     }
     
@@ -118,35 +116,42 @@ public class AddReclamationController implements Initializable {
     @FXML
     private void onBtnEnvoyerRecAction(ActionEvent event) throws IOException {
         //Reclamation r = new Reclamation(1, Integer.valueOf(tfTypeRec.getText()), 1, 1, 4, tfChoiceRec.getText(), taDescRec.getText(), "unseen", "11/10/2022");
-        Integer idAnnonceRec = NULL;
-        Integer idUserRecR = NULL;
+        Integer idAnnonceRec = null;
+        Integer idUserRecR = null;
         String choice = map.get(cbChoiceRec.getSelectionModel().getSelectedIndex()+1);
-        System.out.println("cbChoiceRec.getSelectionModel()"+cbChoiceRec.getSelectionModel());
-        System.out.println("choice"+choice);
+        int selectedCbRec = cbRec.getSelectionModel().getSelectedIndex()+1;
+        
+        System.out.println("choice   "+choice);
+        System.out.println("cbChoiceRec.getSelectionModel()"+selectedCbRec);
+        //System.out.println("choice: "+choice);
+        
         if (selectedItem == 1){
-            idAnnonceRec = reclamationService.getOneAnonceById(cbRec.getSelectionModel().getSelectedIndex()+1).getIdAnnonce();
+            idAnnonceRec = reclamationService.getOneAnonceById(selectedCbRec).getIdAnnonce();
+            //choice = map.get(cbChoiceRec.getSelectionModel().getSelectedIndex()+1);
+            System.out.println("cbRec.getSelectionModel().getSelectedIndex(): "+cbRec.getSelectionModel().getSelectedIndex());
             System.out.println("idAnnonceRec"+idAnnonceRec);
         }
         if (selectedItem == 2){
-            idUserRecR = interfaceUser.getOneById(cbRec.getSelectionModel().getSelectedIndex()+1).getIdUser();
+            idUserRecR = interfaceUser.getOneById(cbRec.getSelectionModel().getSelectedIndex()).getIdUser();
+            //choice = mapCompte.get(cbChoiceRec.getSelectionModel().getSelectedIndex()+1);
             System.out.println("idUserRecR"+idUserRecR);   
         }
             System.out.println("selectedCategorie "+selectedCategorie);
             System.out.println("taDescRec "+taDescRec.getText());
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter dtf = DateTimeFormatter.ISO_LOCAL_DATE;
             LocalDateTime now = LocalDateTime.now(); 
             Reclamation r = new Reclamation()
                 .idReclamation(1)
                 .idCategorieRec(selectedCategorie.getIdCategorie())
                 .idAnnonceRec(idAnnonceRec)
-                .idUserRecS(1)
+                .idUserRecS(1)  // User connected
                 .idUserRecR(idUserRecR)
                 .choiceRec(choice)
                 .descRec(taDescRec.getText())
                 .statusRec("unseen")
                 .dateRec(now.toString())
                 ;
-        System.out.println("reclamation"+r);
+        System.out.println("reclamation***"+r);
             
         btnEnvoyerRec.setDisable(false);
         ReclamationServiceImpl reclamationServiceImpl = new ReclamationServiceImpl();
@@ -175,6 +180,12 @@ public class AddReclamationController implements Initializable {
         selectedCategorie = categorieService.getOneById(selectedItem);
         if (selectedItem == 1){
             cbChoiceRec.getItems().clear();
+            
+            map.put(1, "Suspect(e)");
+            map.put(2, "Non réel(le)");
+            map.put(3, "Arnaqueur(se)");
+            map.put(3, "Autre");
+            
             map.entrySet().forEach(c -> cbChoiceRec.getItems().add(c.getValue()));
 
             List<Annonce> listeAnnonce = reclamationService.getAllAnnonces();
@@ -190,6 +201,12 @@ public class AddReclamationController implements Initializable {
         }
         if (selectedItem == 2){
             cbChoiceRec.getItems().clear();
+            
+            map.put(1, "c1");
+            map.put(2, "c2");
+            map.put(3, "c3");
+            map.put(3, "C4");
+            
             map.entrySet().forEach(c -> cbChoiceRec.getItems().add(c.getValue()));
 
             List<User> listeUser = interfaceUser.Afficher();

@@ -11,6 +11,8 @@ import entities.Reclamation;
 import utils.MyDB;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author AJ
@@ -185,6 +187,52 @@ public class ReclamationServiceImpl implements ReclamationService {
         }
         return findReclamation;
     }
+
+    @Override
+    public int countAnnonceCategorie() {
+        int records =0;
+        String req = "SELECT count(*) FROM `reclamation` WHERE idCategorieRec = 1;" ;
+        PreparedStatement prest;
+        try {
+            prest = conx.prepareStatement(req);
+       
+        ResultSet rs = prest.executeQuery();
+        while (rs.next()) {
+        records = rs.getInt(1);
+        }
+        } catch (SQLException ex) {}
+       return records;
+    }
+
+    @Override
+    public int countCompteCategorie() {
+ int records =0;
+        String req = "SELECT count(*) FROM `reclamation` WHERE idCategorieRec = 2;" ;
+        PreparedStatement prest;
+        try {
+            prest = conx.prepareStatement(req);
+       
+        ResultSet rs = prest.executeQuery();
+        while (rs.next()) {
+        records = rs.getInt(1);
+        }
+        } catch (SQLException ex) {}
+       return records;    }
+
+    @Override
+    public int countAutreCategorie() {
+        int records = 0;
+        String req = "SELECT count(*) FROM `reclamation` WHERE idCategorieRec = 3;" ;
+        PreparedStatement prest;
+        try {
+            prest = conx.prepareStatement(req);
+       
+        ResultSet rs = prest.executeQuery();
+        while (rs.next()) {
+        records = rs.getInt(1);
+        }
+        } catch (SQLException ex) {}
+       return records;    }
 
     
     

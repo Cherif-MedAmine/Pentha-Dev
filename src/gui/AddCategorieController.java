@@ -39,6 +39,8 @@ public class AddCategorieController implements Initializable {
     private Button btnAddCat;
     @FXML
     private Button btnRetourCat;
+    @FXML
+    private Button btnGererCat;
 
     /**
      * Initializes the controller class.
@@ -50,15 +52,19 @@ public class AddCategorieController implements Initializable {
 
     @FXML
     private void onBtnAddCatAction(ActionEvent event) throws IOException {
-        Categorie c = new Categorie(1,tfNomCat.getText());
-        CategorieServiceImpl categorieServiceImpl = new CategorieServiceImpl();
-        categorieServiceImpl.createCategorie(c);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("./ListCategorie.fxml"));
-        Parent root;
-        root=loader.load();
-        btnAddCat.getScene().setRoot(root);
+        if (tfNomCat.getText().length() != 0) {
+            Categorie c = new Categorie(1,tfNomCat.getText());
+            CategorieServiceImpl categorieServiceImpl = new CategorieServiceImpl();
+            categorieServiceImpl.createCategorie(c);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("./ListCategorie.fxml"));
+            Parent root;
+            root=loader.load();
+            btnAddCat.getScene().setRoot(root);
         
-        new Alert(Alert.AlertType.INFORMATION, "Categorie ajouter avec succès").show();
+            new Alert(Alert.AlertType.INFORMATION, "Categorie ajouter avec succès").show();
+        }else {
+                new Alert(Alert.AlertType.INFORMATION, "Entrer un nom !!").show();
+        }
     }
 
     @FXML
@@ -69,5 +75,16 @@ public class AddCategorieController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+    @FXML
+    private void onBtnGererCatAction(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("ListCategorie.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    
     
 }

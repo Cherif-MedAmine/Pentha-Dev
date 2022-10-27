@@ -28,8 +28,9 @@ public class ReclamationFXMain extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("HomeReclamation.fxml"));
-            //Parent root = FXMLLoader.load(getClass().getResource("TestAdmin.fxml"));
+            //Parent root = FXMLLoader.load(getClass().getResource("HomeReclamation.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("TestAdmin.fxml"));
+            //Parent root = FXMLLoader.load(getClass().getResource("PieChart.fxml"));
             
             
             Scene scene = new Scene(root);

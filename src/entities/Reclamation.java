@@ -127,27 +127,27 @@ public class Reclamation {
     public void setStatusRec(String statusRec) {
         this.statusRec = statusRec;
     }
-    public Reclamation idReclamation(int idReclamation) {
+    public Reclamation idReclamation(Integer idReclamation) {
         this.idReclamation = idReclamation;
          return this;
     }
 
-    public Reclamation idCategorieRec(int idCategorieRec) {
+    public Reclamation idCategorieRec(Integer idCategorieRec) {
         this.idCategorieRec = idCategorieRec;
         return this;
     }
 
-    public Reclamation idAnnonceRec(int idAnnonceRec) {
+    public Reclamation idAnnonceRec(Integer idAnnonceRec) {
         this.idAnnonceRec = idAnnonceRec;
         return this;        
     }
 
-    public Reclamation idUserRecS(int idUserRecS) {
+    public Reclamation idUserRecS(Integer idUserRecS) {
         this.idUserRecS = idUserRecS;
         return this;
     }
 
-    public Reclamation idUserRecR (int idUserRecR) {
+    public Reclamation idUserRecR (Integer idUserRecR) {
         this.idUserRecR = idUserRecR;
         return this;
 
